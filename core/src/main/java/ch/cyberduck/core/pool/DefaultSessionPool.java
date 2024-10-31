@@ -51,7 +51,7 @@ public class DefaultSessionPool implements SessionPool {
     private static final int POOL_WARNING_THRESHOLD = 5;
 
     private final FailureDiagnostics<BackgroundException> diagnostics
-        = new DefaultFailureDiagnostics();
+            = new DefaultFailureDiagnostics();
 
     private final ConnectionService connect;
     private final TranscriptListener transcript;
@@ -164,9 +164,9 @@ public class DefaultSessionPool implements SessionPool {
                         final BackgroundException failure = (BackgroundException) cause;
                         log.warn(String.format("Failure %s obtaining connection for %s", failure, this));
                         if(diagnostics.determine(failure) == FailureDiagnostics.Type.network) {
-                            final int max = Math.max(1, pool.getMaxIdle() - 1);
-                            log.warn(String.format("Lower maximum idle pool size to %d connections.", max));
-                            pool.setMaxIdle(max);
+                            final int max = Math.max(1, pool.getMaxTotal() - 1);
+                            log.warn(String.format("Lower maximum total pool size to %d connections.", max));
+                            pool.setMaxTotal(max);
                             // Clear pool from idle connections
                             pool.clear();
                         }
