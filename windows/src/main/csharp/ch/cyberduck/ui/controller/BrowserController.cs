@@ -751,6 +751,7 @@ namespace Ch.Cyberduck.Ui.Controller
                 }
                 foreach (Host promisedDragBookmark in dropargs.SourceModels)
                 {
+                    _bookmarkModel.Source.lock();
                     _bookmarkModel.Source.remove(promisedDragBookmark);
                     if (destIndex > _bookmarkModel.Source.size())
                     {
@@ -760,6 +761,7 @@ namespace Ch.Cyberduck.Ui.Controller
                     {
                         _bookmarkModel.Source.add(destIndex, promisedDragBookmark);
                     }
+                    _bookmarkModel.Source.unlock();
                     //view.selectRowIndexes(NSIndexSet.indexSetWithIndex(row), false);
                     //view.scrollRowToVisible(row);
                 }

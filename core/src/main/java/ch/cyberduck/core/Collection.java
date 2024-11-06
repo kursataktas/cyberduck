@@ -255,14 +255,14 @@ public class Collection<E> extends ArrayList<E> implements CollectionListener<E>
     /**
      * Acquire lock to write to collection
      */
-    protected void lock() {
+    public void lock() {
         locked.lock();
     }
 
     /**
      * Release exclusive lock on collection
      */
-    protected void unlock() {
+    public void unlock() {
         locked.unlock();
     }
 }
